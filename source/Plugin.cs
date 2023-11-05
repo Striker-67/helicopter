@@ -27,6 +27,7 @@ namespace helo
         public GameObject down;
         public GameObject leftturn;
         public GameObject rightturn;
+        GameObject helipad;
 
         void Start()
         {
@@ -59,6 +60,7 @@ namespace helo
             helocoopter = bundle.LoadAsset<GameObject>("helo");
             helocoopter = GameObject.Instantiate(helocoopter);
             setup();
+           
         }
         public AssetBundle LoadAssetBundle(string path)
         {
@@ -69,8 +71,9 @@ namespace helo
         }
         void setup()
         {    
-            helocoopter.transform.localPosition = new Vector3 (-65.4993f, 21.6141f, - 82.7445f);
+            helocoopter.transform.position = new Vector3 (-61.5989f, 7.9643f, - 62.0383f);
             up = helocoopter.transform.Find("Control panel/up key").gameObject;
+            helipad = helocoopter.transform.Find("tinker").gameObject;
             backward = helocoopter.transform.Find("Control panel/backward").gameObject;
             forward = helocoopter.transform.Find("Control panel/forward").gameObject;
             left = helocoopter.transform.Find("Control panel/left").gameObject;
@@ -78,7 +81,8 @@ namespace helo
             right = helocoopter.transform.Find("Control panel/right").gameObject;
             rightturn = helocoopter.transform.Find("Control panel/right turn").gameObject;
             leftturn = helocoopter.transform.Find("Control panel/left turn").gameObject;
-
+            helipad.transform.parent = null;
+            helipad.transform.position = new Vector3(-75.9742f, 0.5145f, - 46.5147f);
             up.AddComponent<Keys>().drone = helocoopter;
             backward.AddComponent<Keys>().drone = helocoopter;
             forward.AddComponent<Keys>().drone = helocoopter;
@@ -96,6 +100,8 @@ namespace helo
             rightturn.layer = 18;
             leftturn.layer = 18;
             helocoopter.SetActive(false);
+            helipad.SetActive(false);
+            
         }
 
         /* This attribute tells Utilla to call this method when a modded room is joined */
@@ -107,6 +113,7 @@ namespace helo
 
             inRoom = true;
             helocoopter.SetActive(true);
+            helipad.SetActive(true);
         }
 
         /* This attribute tells Utilla to call this method when a modded room is left */
@@ -118,6 +125,7 @@ namespace helo
 
             inRoom = false;
             helocoopter.SetActive(false);
+            helipad.SetActive(false);
         }
     }
 }

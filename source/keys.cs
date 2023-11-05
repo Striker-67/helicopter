@@ -32,7 +32,7 @@ public class Keys : MonoBehaviour
     {
         if (touchTime + debounceTime >= Time.time) return;
 
-        if (other.TryGetComponent(out GorillaTriggerColliderHandIndicator component) && !component.isLeftHand)
+        if (other.TryGetComponent(out GorillaTriggerColliderHandIndicator component) && !component.isLeftHand || component.isLeftHand)
         {
             GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(211, component.isLeftHand, 0.12f);
             GorillaTagger.Instance.StartVibration(component.isLeftHand, GorillaTagger.Instance.tapHapticStrength / 2f, GorillaTagger.Instance.tapHapticDuration);
@@ -43,7 +43,7 @@ public class Keys : MonoBehaviour
     {
         if (touchTime + debounceTime >= Time.time) return;
 
-        if (other.TryGetComponent(out GorillaTriggerColliderHandIndicator component) && !component.isLeftHand )
+        if (other.TryGetComponent(out GorillaTriggerColliderHandIndicator component) && !component.isLeftHand || component.isLeftHand)
         {
             touchTime = Time.time;
 
@@ -54,7 +54,7 @@ public class Keys : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out GorillaTriggerColliderHandIndicator component) && !component.isLeftHand )
+        if (other.TryGetComponent(out GorillaTriggerColliderHandIndicator component) && !component.isLeftHand || component.isLeftHand)
         {
 
 
